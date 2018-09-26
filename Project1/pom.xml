@@ -27,6 +27,8 @@
     <groupId>ojdbc14</groupId>
     <artifactId>ojdbc14</artifactId>
     <version>10.2.0.3.0</version>
+	<scope>system</scope>
+	<systemPath>${project.basedir}/ojdbc14.jar</systemPath>
 </dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
