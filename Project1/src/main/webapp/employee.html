@@ -1,0 +1,61 @@
+<div id="navbar">
+		<button onclick="getLogout()">Logout</button>
+</div>
+<p id="hello"></p>
+<div id="employeeDash">
+    <button onclick="createRequest()">Create Reimbursement Requests</button>
+    <button onclick="viewPending()">View All Pending Requests</button>
+    <button onclick="viewResolved()">View All Resolved Requests</button>
+    <button onclick="viewInfo()">View and Update Your Information</button>
+</div>
+<script>
+function getUsername() {
+    console.log("getting username");
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById('hello').innerHTML = "Hello " + this.responseText;
+        }
+    };
+    xhttp.open("get", "/Project1/username.do", true);
+    xhttp.send();
+}
+function createRequest() {
+    /* let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById('body').innerHTML = this.responseText;
+
+        }
+    };
+    xhttp.open("get", "/Project1/employee/reimburse.do", true);
+    xhttp.send(); */
+	getPage("create");
+}
+function viewPending() {
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            for (let i = 0; i<this.responseText.length; i++){
+            	document.getElementById('body').append(this.responseText[i]);
+            }
+
+        }
+    };
+    xhttp.open("get", "/Project1/employee/pending.do", true);
+    xhttp.send();
+}
+function viewInfo(){
+	let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            for (let i = 0; i<this.responseText.length; i++){
+            	document.getElementById('body').append(this.responseText[i]);
+            }
+
+        }
+    };
+    xhttp.open("get", "/Project1/employee/info.do", true);
+    xhttp.send();
+}
+</script>	

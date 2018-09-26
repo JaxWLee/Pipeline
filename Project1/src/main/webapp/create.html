@@ -1,0 +1,43 @@
+<div id="navbar">
+		<button onclick="getDashboard()">Dashboard</button>
+		<button onclick="getLogout()">Logout</button>
+</div>
+<h3>Create A New Reimbursement Request</h3>
+
+<form action="/Project1/employee/reimburse/submit.do" method="POST" onsubmit="event.preventDefault(); submitRequest()">
+    <label>Value Of Reimbursement:</label>
+    <input type="number" name="value" id="value">
+    <button>Create Request</button>
+</form>
+<script>
+function submitRequest() {
+	
+	console.log( document.getElementById("value").value)
+    const value = document.getElementById("value").value;
+    document.getElementById("value").value = "";
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById('body').innerHTML = this.responseText;
+
+        }
+    };
+    xhttp.open("post", "/Project1/employee/reimburse/submit.do", true);
+    xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+    xhttp.send("value=" + value);
+}
+function getDashboard() {
+    //for return to dashboard
+	 let xhttp = new XMLHttpRequest();
+     xhttp.onreadystatechange = function () {
+         if (this.readyState == 4 && this.status == 200) {
+             document.getElementById('body').innerHTML = this.responseText;
+
+         }
+         getUsername();
+     };
+     xhttp.open("get", "/Project1/dashboard.do", true);
+     xhttp.send();
+}
+
+</script>

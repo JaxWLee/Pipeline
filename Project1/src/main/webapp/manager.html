@@ -1,0 +1,25 @@
+<div id="navbar">
+		<button onclick="getLogout()">Logout</button>
+</div>
+<p id="hello"></p>
+<div id="managerDash">
+<button>View All Pending Requests</button>
+<button>View All Resolved Requests</button>
+<button>View All Requests By Employee</button>
+<button>Update A Request</button>
+</div>
+<script>
+function getUsername() {
+    console.log("getting username");
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById('hello').innerHTML = "Hello " + this.responseText;
+
+        }
+    };
+    xhttp.open("get", "/Project1/username.do", true);
+    xhttp.send();
+}
+getUsername();
+</script>

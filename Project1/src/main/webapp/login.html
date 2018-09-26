@@ -1,0 +1,43 @@
+<h1>Welcome</h1>
+<h3>Please Log In</h3>
+<form id="form" action="/Project1/login/submit.do" method="post" onsubmit="event.preventDefault(); submitForm()">
+	<label>Username:</label>
+	<input id="username" type="text" name="username">
+	<label>Password:</label>
+	<input id="password" type="text" name="password">
+	<button>Submit</button>
+</form>
+<p id="test"></p>
+
+<script>
+function submitForm() {
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        document.getElementById("username").value = "";
+        document.getElementById("password").value = "";
+        console.log(username,password);
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById('body').innerHTML = this.responseText;
+                getUsername();
+            }
+        };
+        xhttp.open("post", "/Project1/login/submit.do", true);
+        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+        xhttp.send("username=" + username + "&password=" + password);
+    }
+function getUsername() {
+    console.log("getting username");
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById('hello').innerHTML = "Hello " + this.responseText;
+
+        }
+    };
+    xhttp.open("get", "/Project1/username.do", true);
+    xhttp.send();
+}
+
+</script>
